@@ -10,3 +10,9 @@ Install the required development dependencies:
 npm install -g pnpm
 pnpm add eslint prettier eslint-plugin-prettier eslint-config-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin -D
 ```
+
+## Initialize an ESLint configuration file:
+
+```bash
+pnpm eslint --init
+```
