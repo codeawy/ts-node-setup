@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "isActive": true,
+      "hobbies": [
+        "reading",
+        "gaming"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Jane Doe",
+      "isActive": false,
+      "hobbies": [
+        "reading",
+        "gaming"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "John Doe",
+      "isActive": true,
+      "hobbies": [
+        "reading",
+        "gaming"
+      ]
+    }
+  ]
+}
