@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { getEnv } from "../utils/validateEnv";
 
 interface RegisterData {
   username: string;
@@ -16,12 +17,20 @@ export class AuthService {
     // Generate verfication token
     const verficationToken = crypto.randomBytes(32).toString("hex");
 
-    // ** communicate with the Model
-    const token = "";
+    // Calc token expiry (default: 24 hours)
+    const { VERIFICATION_TOKEN_EXPIRES } = getEnv();
+    const expiryHours = parseInt(VERIFICATION_TOKEN_EXPIRES, 10) || 24;
+    const verficationTokenExpires = new Date();
+    verficationTokenExpires.setHours(
+      verficationTokenExpires.getHours() + expiryHours
+    );
+
+    // Send verification email
 
     return {
       ...userData,
-      token
+      verficationToken,
+      verficationTokenExpires
     };
   }
 

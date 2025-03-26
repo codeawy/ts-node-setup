@@ -32,3 +32,11 @@ export function validateEnv(): EnvSchema {
     process.exit();
   }
 }
+
+export function getEnv(): EnvSchema {
+  if (!env) {
+    return validateEnv();
+  }
+
+  return env;
+}
