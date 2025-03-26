@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 interface RegisterData {
   username: string;
   email: string;
@@ -11,9 +13,11 @@ interface LoginData {
 
 export class AuthService {
   async register(userData: RegisterData) {
+    // Generate verfication token
+    const verficationToken = crypto.randomBytes(32).toString("hex");
+
     // ** communicate with the Model
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30";
+    const token = "";
 
     return {
       ...userData,
@@ -26,7 +30,6 @@ export class AuthService {
     const token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30";
 
-    console.log(userData);
     if (userData.email !== "user@user.com") {
       throw new Error("User does not exists!");
     }

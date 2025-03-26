@@ -5,7 +5,6 @@ import { AuthService } from "../services/authService";
 export class AuthController {
   private authService = new AuthService();
 
-  // * Create a new user => request body =>  HTTP Method => POST
   register = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userData = req.body;

@@ -29,13 +29,8 @@ export function validateRequest(schema: AnyZodObject) {
           };
         });
 
-        console.log(
-          "Validation Errors:",
-          JSON.stringify(validationErrors, null, 2)
-        );
         next(new BadRequestError("Validation Failed", validationErrors));
       } else {
-        console.log(error);
         next(error);
       }
     }

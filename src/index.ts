@@ -1,8 +1,15 @@
-import express, { Express, NextFunction, Request, Response, ErrorRequestHandler } from "express";
-import fs from "fs";
-import path from "path";
+import express, {
+  Express,
+  NextFunction,
+  Request,
+  Response,
+  ErrorRequestHandler
+} from "express";
 import rootRouter from "./routes";
 import { HttpError } from "./utils/errors";
+import { validateEnv } from "./utils/validateEnv";
+
+validateEnv();
 
 const app: Express = express();
 
@@ -13,9 +20,14 @@ app.use(express.json());
 app.use("/api", rootRouter);
 
 // Global error handler middleware
-const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+const errorHandler: ErrorRequestHandler = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   console.error(err);
-  
+
   if (err instanceof HttpError) {
     res.status(err.statusCode).json({
       status: "error",
@@ -27,7 +39,9 @@ const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Respon
     res.status(500).json({
       status: "error",
       message: "Something went wrong",
-      ...(process.env.NODE_ENV === "development" ? { details: err.message } : {})
+      ...(process.env.NODE_ENV === "development"
+        ? { details: err.message }
+        : {})
     });
   }
 };
