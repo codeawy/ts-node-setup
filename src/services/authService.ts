@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import { getEnv } from "../utils/validateEnv";
+import { EmailService } from "./emailService";
 
 interface RegisterData {
   username: string;
@@ -13,6 +14,8 @@ interface LoginData {
 }
 
 export class AuthService {
+  private emailService = new EmailService();
+
   async register(userData: RegisterData) {
     // Generate verfication token
     const verficationToken = crypto.randomBytes(32).toString("hex");
@@ -26,11 +29,15 @@ export class AuthService {
     );
 
     // Send verification email
+    await this.emailService.sendVerificationEmail({
+      token: verficationToken,
+      email: userData.email
+    });
 
     return {
       ...userData,
-      verficationToken,
-      verficationTokenExpires
+      message:
+        "Registration successful. Please check your email to verify your account."
     };
   }
 

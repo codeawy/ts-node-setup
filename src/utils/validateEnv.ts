@@ -13,6 +13,7 @@ const envSchema = z.object({
     .default("5000"),
   // Email configuration (optional in development, required in production)
   EMAIL_HOST: z.string().optional(),
+  EMAIL_PORT: z.string().optional(),
   EMAIL_USER: z.string().optional(),
   EMAIL_PASS: z.string().optional(),
   EMAIL_SECURE: z.string().optional(),
